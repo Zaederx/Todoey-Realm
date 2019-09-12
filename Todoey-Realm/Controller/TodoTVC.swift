@@ -11,10 +11,11 @@ import SwipeCellKit
 import RealmSwift
 
 class TodoTVC: UITableViewController {
-    
+    //MARK: - Variable and Constant Declarations
     var todos:Results<Todo>?
     let realm = try! Realm()
     
+    //MARK: - VIEW LOADING SETUP
     override func viewDidLoad() {
         super.viewDidLoad()
         loadTodos()
@@ -22,6 +23,7 @@ class TodoTVC: UITableViewController {
         // Do any additional setup after loading the view.
     }
 
+    //MARK:- TableView Override Precusor Code
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos?.count ?? 1
     }
@@ -36,7 +38,9 @@ class TodoTVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("tableView didSelectRowAt and performed Segue")
         performSegue(withIdentifier: "toItemsTVC", sender: self)
+        print("tableView didSelectRowAt and performed Segue")//might not work because segue triggered new call to other class
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -44,29 +48,35 @@ class TodoTVC: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow{
             destinationVC.todo = todos?[indexPath.row]
         }
+        print("Segue prepared")
     }
    
+    //MARK: - Realm Data FunctionS for CRUD
 
     func loadTodos () {
         todos = realm.objects(Todo.self)
         tableView.reloadData()
     }
+    
     func saveTodo(with todo: Todo) {
         do {
             try realm.write {
                 realm.add(todo)
             }
         } catch {
-            print("Error saving Todos \(error)")
+            print("Error saving Todos: \(error)")
         }
+        print("Todo Saved")
         tableView.reloadData()
     }
+    
     func deleteTodo(with indexPath: IndexPath){
-
+        realm.delete((todos?[indexPath.row])!)
+        print("Todo deleted")
     }
 }
 
-//MARK: - SwipeTableCellDelegate
+    //MARK: - SwipeTableCellDelegate
 extension TodoTVC: SwipeTableViewCellDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         guard orientation == .right else {return nil}

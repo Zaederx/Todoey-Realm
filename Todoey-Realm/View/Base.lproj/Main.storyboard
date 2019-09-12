@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Todos-->
         <scene sceneID="uZS-ph-QJ5">
             <objects>
                 <tableViewController id="ncu-Qg-9lA" customClass="TodoTVC" customModule="Todoey_Realm" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,7 +34,9 @@
                             <outlet property="delegate" destination="ncu-Qg-9lA" id="0vk-zN-S0N"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="NQC-gR-3DP"/>
+                    <navigationItem key="navigationItem" title="Todos" id="NQC-gR-3DP">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ec3-dX-g6K"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="6sh-6V-79W" kind="show" identifier="toItemsTVC" id="VKf-gr-6La"/>
                     </connections>
@@ -43,7 +45,7 @@
             </objects>
             <point key="canvasLocation" x="11.594202898550726" y="72.991071428571431"/>
         </scene>
-        <!--ItemTVC-->
+        <!--Items-->
         <scene sceneID="jaX-QY-51K">
             <objects>
                 <tableViewController id="6sh-6V-79W" customClass="ItemTVC" customModule="Todoey_Realm" customModuleProvider="target" sceneMemberID="viewController">
@@ -66,10 +68,13 @@
                             <outlet property="delegate" destination="6sh-6V-79W" id="1id-gn-R78"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Items" id="kLf-Df-PEW">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="fOt-is-hGp"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ezo-iz-fyj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="78"/>
+            <point key="canvasLocation" x="796" y="73"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3rv-hT-4bq">
