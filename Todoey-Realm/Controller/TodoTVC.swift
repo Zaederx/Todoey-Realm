@@ -13,11 +13,12 @@ import RealmSwift
 class TodoTVC: UITableViewController {
     
     var todos:Results<Todo>?
-    var realm = try! Realm()
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadTodos()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         // Do any additional setup after loading the view.
     }
 
@@ -47,10 +48,21 @@ class TodoTVC: UITableViewController {
    
 
     func loadTodos () {
-//        todos = realm.
+        todos = realm.objects(Todo.self)
+        tableView.reloadData()
+    }
+    func saveTodo(with todo: Todo) {
+        do {
+            try realm.write {
+                realm.add(todo)
+            }
+        } catch {
+            print("Error saving Todos \(error)")
+        }
+        tableView.reloadData()
     }
     func deleteTodo(with indexPath: IndexPath){
-        
+
     }
 }
 
