@@ -35,7 +35,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Todos" id="NQC-gR-3DP">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ec3-dX-g6K"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ec3-dX-g6K">
+                            <connections>
+                                <action selector="addTodoPressed:" destination="ncu-Qg-9lA" id="X9O-JJ-nyh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="6sh-6V-79W" kind="show" identifier="toItemsTVC" id="VKf-gr-6La"/>

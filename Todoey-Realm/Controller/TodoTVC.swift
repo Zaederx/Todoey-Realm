@@ -53,6 +53,10 @@ class TodoTVC: UITableViewController {
    
     //MARK: - Realm Data FunctionS for CRUD
 
+    func createTodo(name:String) {
+        var todo = realm.create(Todo.self)
+        todo.name = name
+    }
     func loadTodos () {
         todos = realm.objects(Todo.self)
         tableView.reloadData()
@@ -73,6 +77,22 @@ class TodoTVC: UITableViewController {
     func deleteTodo(with indexPath: IndexPath){
         realm.delete((todos?[indexPath.row])!)
         print("Todo deleted")
+    }
+    
+    //MARK: - Buttons and User Interaction
+    @IBAction func addTodoPressed(_ sender: Any) {
+        var textFieldCopy = UITextField()
+        let alert = UIAlertController(title: "Add Todo", message: "Enter Todo Name", preferredStyle: .alert)
+        alert.addTextField (configurationHandler: { (textField) in
+            textField.placeholder = "New Todo"
+            textFieldCopy = textField
+            print("textFieldText: \(textField.text!)")
+        })
+        
+        let addTodo = UIAlertAction(title: "Add Todo", style: .default) { (action) in
+            self.createTodo(name:"name" )
+        }
+        createTodo(name:textFieldCopy.text!)
     }
 }
 
